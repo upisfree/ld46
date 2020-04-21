@@ -1,0 +1,50 @@
+<!DOCTYPE FilterScript>
+<FilterScript>
+ <xmlfilter name="Screened Poisson Surface Reconstruction">
+  <xmlparam name="cgDepth" value="0"/>
+  <xmlparam name="confidence" value="false"/>
+  <xmlparam name="depth" value="8"/>
+  <xmlparam name="fullDepth" value="5"/>
+  <xmlparam name="iters" value="8"/>
+  <xmlparam name="pointWeight" value="4"/>
+  <xmlparam name="preClean" value="false"/>
+  <xmlparam name="samplesPerNode" value="1.5"/>
+  <xmlparam name="scale" value="1.1"/>
+  <xmlparam name="visibleLayer" value="false"/>
+ </xmlfilter>
+ <filter name="Delete Current Mesh"/>
+ <filter name="Simplification: Quadric Edge Collapse Decimation">
+  <Param name="TargetFaceNum" description="Target number of faces" tooltip="The desired final number of faces." type="RichInt" value="49816"/>
+  <Param name="TargetPerc" description="Percentage reduction (0..1)" tooltip="If non zero, this parameter specifies the desired final size of the mesh as a percentage of the initial size." type="RichFloat" value="0.2"/>
+  <Param name="QualityThr" description="Quality threshold" tooltip="Quality threshold for penalizing bad shaped faces.&lt;br>The value is in the range [0..1]&#xa; 0 accept any kind of face (no penalties),&#xa; 0.5  penalize faces with quality &lt; 0.5, proportionally to their shape&#xa;" type="RichFloat" value="0.3"/>
+  <Param name="PreserveBoundary" description="Preserve Boundary of the mesh" tooltip="The simplification process tries to do not affect mesh boundaries during simplification" type="RichBool" value="false"/>
+  <Param name="BoundaryWeight" description="Boundary Preserving Weight" tooltip="The importance of the boundary during simplification. Default (1.0) means that the boundary has the same importance of the rest. Values greater than 1.0 raise boundary importance and has the effect of removing less vertices on the border. Admitted range of values (0,+inf). " type="RichFloat" value="1"/>
+  <Param name="PreserveNormal" description="Preserve Normal" tooltip="Try to avoid face flipping effects and try to preserve the original orientation of the surface" type="RichBool" value="false"/>
+  <Param name="PreserveTopology" description="Preserve Topology" tooltip="Avoid all the collapses that should cause a topology change in the mesh (like closing holes, squeezing handles, etc). If checked the genus of the mesh should stay unchanged." type="RichBool" value="false"/>
+  <Param name="OptimalPlacement" description="Optimal position of simplified vertices" tooltip="Each collapsed vertex is placed in the position minimizing the quadric error.&#xa; It can fail (creating bad spikes) in case of very flat areas. &#xa;If disabled edges are collapsed onto one of the two original vertices and the final mesh is composed by a subset of the original vertices. " type="RichBool" value="true"/>
+  <Param name="PlanarQuadric" description="Planar Simplification" tooltip="Add additional simplification constraints that improves the quality of the simplification of the planar portion of the mesh." type="RichBool" value="false"/>
+  <Param name="QualityWeight" description="Weighted Simplification" tooltip="Use the Per-Vertex quality as a weighting factor for the simplification. The weight is used as a error amplification value, so a vertex with a high quality value will not be simplified and a portion of the mesh with low quality values will be aggressively simplified." type="RichBool" value="false"/>
+  <Param name="AutoClean" description="Post-simplification cleaning" tooltip="After the simplification an additional set of steps is performed to clean the mesh (unreferenced vertices, bad faces, etc)" type="RichBool" value="true"/>
+  <Param name="Selected" description="Simplify only selected faces" tooltip="The simplification is applied only to the selected set of faces.&#xa; Take care of the target number of faces!" type="RichBool" value="false"/>
+ </filter>
+ <filter name="Per Vertex Texture Function">
+  <Param name="u" description="func u = " tooltip="function to generate u texture coord. Expected Range 0-1" type="RichString" value="x"/>
+  <Param name="v" description="func v = " tooltip="function to generate v texture coord. Expected Range 0-1" type="RichString" value="y"/>
+  <Param name="onselected" description="only on selection" tooltip="if checked, only affects selected vertices" type="RichBool" value="false"/>
+ </filter>
+ <filter name="Convert PerVertex UV into PerWedge UV"/>
+ <filter name="Parametrization: Trivial Per-Triangle">
+  <Param name="sidedim" description="Quads per line" tooltip="Indicates how many triangles have to be put on each line (every quad contains two triangles)&#xa;Leave 0 for automatic calculation" type="RichInt" value="0"/>
+  <Param name="textdim" description="Texture Dimension (px)" tooltip="Gives an indication on how big the texture is" type="RichInt" value="2048"/>
+  <Param name="border" description="Inter-Triangle border (px)" tooltip="Specifies how many pixels to be left between triangles in parametrization domain" type="RichInt" value="0"/>
+  <Param enum_val0="Basic" enum_val1="Space-optimizing" name="method" description="Method" tooltip="Choose space optimizing to map smaller faces into smaller triangles in parametrizazion domain" type="RichEnum" enum_cardinality="2" value="0"/>
+ </filter>
+ <filter name="Transfer: Vertex Color to Texture">
+  <Param name="textName" description="Texture file" tooltip="The texture file to be created" type="RichString" value="box_tex.png"/>
+  <Param name="textW" description="Texture width (px)" tooltip="The texture width" type="RichInt" value="2048"/>
+  <Param name="textH" description="Texture height (px)" tooltip="The texture height" type="RichInt" value="2048"/>
+  <Param name="overwrite" description="Overwrite texture" tooltip="if current mesh has a texture will be overwritten (with provided texture dimension)" type="RichBool" value="false"/>
+  <Param name="assign" description="Assign texture" tooltip="assign the newly created texture" type="RichBool" value="true"/>
+  <Param name="pullpush" description="Fill texture" tooltip="if enabled the unmapped texture space is colored using a pull push filling algorithm, if false is set to black" type="RichBool" value="true"/>
+ </filter>
+</FilterScript>

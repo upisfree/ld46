@@ -1,0 +1,17 @@
+<!DOCTYPE FilterScript>
+<FilterScript>
+ <filter name="Parametrization: Trivial Per-Triangle">
+  <Param tooltip="Indicates how many triangles have to be put on each line (every quad contains two triangles)&#xa;Leave 0 for automatic calculation" type="RichInt" description="Quads per line" name="sidedim" value="0"/>
+  <Param tooltip="Gives an indication on how big the texture is" type="RichInt" description="Texture Dimension (px)" name="textdim" value="4096"/>
+  <Param tooltip="Specifies how many pixels to be left between triangles in parametrization domain" type="RichInt" description="Inter-Triangle border (px)" name="border" value="4"/>
+  <Param tooltip="Choose space optimizing to map smaller faces into smaller triangles in parametrizazion domain" type="RichEnum" description="Method" enum_cardinality="2" name="method" value="0" enum_val0="Basic" enum_val1="Space-optimizing"/>
+ </filter>
+ <filter name="Transfer: Vertex Color to Texture">
+  <Param tooltip="The texture file to be created" type="RichString" description="Texture file" name="textName" value="material_0.png"/>
+  <Param tooltip="The texture width" type="RichInt" description="Texture width (px)" name="textW" value="4096"/>
+  <Param tooltip="The texture height" type="RichInt" description="Texture height (px)" name="textH" value="4096"/>
+  <Param tooltip="if current mesh has a texture will be overwritten (with provided texture dimension)" type="RichBool" description="Overwrite texture" name="overwrite" value="false"/>
+  <Param tooltip="assign the newly created texture" type="RichBool" description="Assign texture" name="assign" value="true"/>
+  <Param tooltip="if enabled the unmapped texture space is colored using a pull push filling algorithm, if false is set to black" type="RichBool" description="Fill texture" name="pullpush" value="true"/>
+ </filter>
+</FilterScript>
