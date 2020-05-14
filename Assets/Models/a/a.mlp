@@ -1,7 +1,7 @@
 <!DOCTYPE MeshLabDocument>
 <MeshLabProject>
  <MeshGroup>
-  <MLMesh label="Poisson mesh" filename="a.obj">
+  <MLMesh filename="a.obj" label="Poisson mesh">
    <MLMatrix44>
 1 0 0 0 
 0 1 0 0 
