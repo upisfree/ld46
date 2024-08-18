@@ -13,4 +13,5 @@ sources: https://github.com/upisfree/ld46
  
 
 made in one day in may 2020
-repository war recreated in august 2024 due shitty github policy about keeping all git lfs files in their system without a button to delete them
+
+repository was recreated in august 2024 due shitty github policy about keeping all git lfs files in their system without a button to delete them
